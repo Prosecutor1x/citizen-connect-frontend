@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  font-family: 'Quicksand', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#FF9898] via-[#8054FF] to-[#FF9898] bg-size-200 bg-pos-0 hover:bg-pos-100 text-sm md:text-base md:px-8 px-4 md:py-3 py-2 font-medium rounded-md text-white active:scale-95 transition-all duration-500;
+  }
+
+  .anchor-custom {
+    @apply hover:underline underline-offset-4 text-white text-base cursor-pointer;
+  }
+
+  .input-primary {
+    @apply bg-grey px-6 py-2 focus:outline-none text-light_grey font-light rounded-md;
+  }
+  .btn-audit-primary {
+    @apply rounded-full bg-[#FBFAFF] border-[3px] border-purple text-purple px-6 py-2 font-bold cursor-pointer transition-all active:scale-95 duration-150 hover:text-violet  hover:border-violet shadow-[4px_4px_7px_0px_rgba(0,0,0,0.25)];
+  }
+  .btn-audit-secondary {
+    @apply rounded-full bg-purple border-[3px] border-[#E6E7EE] text-white px-6 py-2 font-bold cursor-pointer transition-all active:scale-95 duration-150 shadow-[4px_4px_7px_0px_rgba(0,0,0,0.25)]  hover:bg-violet;
+  }
+  .input-secondary {
+    @apply text-base rounded-lg border-[2px]  border-[#C1C1C1]  p-3  focus:outline-none w-full;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #212121;
+}
