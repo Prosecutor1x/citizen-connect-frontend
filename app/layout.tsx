@@ -1,14 +1,15 @@
 import './globals.css'
-import { Inter, Quicksand } from 'next/font/google'
+import { Inter, Merriweather, Quicksand } from 'next/font/google'
 import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
-const quicksand = Quicksand({
+const merriweather = Merriweather({
     weight: ['400', '700'],
     style: ['normal'],
     subsets: ['latin'],
     display: 'swap',
 })
+
 
 export const metadata = {
     title: 'Bongobashi a citizen connect app',
@@ -18,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={quicksand.className}>
+            <body className={merriweather.className}>
                 {' '}
                 <Providers>{children} </Providers>
             </body>
