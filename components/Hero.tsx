@@ -3,8 +3,12 @@ import React from 'react'
 const Hero = () => {
     return (
         <div className='relative w-screen'>
-           <img src='/hero.png'/>
-           <h1 className='absolute top-1/4 left-8 text-white text-6xl'>Citizen <br/>Connect</h1>
+            <img src='/hero.png' />
+            <section className='absolute top-1/4 left-8'>
+                <h1 className=' text-white text-6xl'>Citizen <br />Connect</h1>
+                <p className='text-white text-lg'>An Online Platform to submit your local propblems<br/> directly to th government officials.</p>
+            </section>
+
         </div>
     )
 }

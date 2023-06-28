@@ -38,7 +38,8 @@ module.exports = {
       colors: {
         "bluePrimary": "#1A75FF",
         "blueSecondary": "#F0F6FF",
-        "blueDeep": "#002966"
+        "blueDeep": "#002966",
+        "blueBackground": "#F2F7FF"
 
       },
       fontFamily: {
