@@ -1,3 +1,4 @@
+"use client"
 import Hero from '@/components/Hero'
 import IssueReportAll from '@/components/IssueReport.tsx/IssueReportAll'
 import IssueReportCard from '@/components/IssueReport.tsx/issueReport.Card'
