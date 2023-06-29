@@ -35,7 +35,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "app/profile-create"  ],
   "exclude": [
     "node_modules"
   ]
