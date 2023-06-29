@@ -1,14 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
 
 
 body {
   overflow-x: hidden;
   width: 100%;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Merriweather', sans-serif;
 }
 
 html {
@@ -18,7 +18,7 @@ html {
 @layer components {
   
   .btn-primary {
-    @apply bg-gradient-to-r from-[#FF9898] via-[#8054FF] to-[#FF9898] bg-size-200 bg-pos-0 hover:bg-pos-100 text-sm md:text-base md:px-8 px-4 md:py-3 py-2 font-medium rounded-md text-white active:scale-95 transition-all duration-500;
+    @apply bg-bluePrimary  text-sm md:text-base md:px-8 px-4 md:py-3 py-2 rounded-full text-white active:scale-95 transition-all duration-500 hover:bg-blueDeep hover:text-white;
   }
   .anchor-custom {
     @apply hover:underline underline-offset-4 text-white text-base cursor-pointer;

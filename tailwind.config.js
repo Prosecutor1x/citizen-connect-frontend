@@ -36,11 +36,14 @@ module.exports = {
         '3xl': '1670px',
       },
       colors: {
-       
+        "bluePrimary": "#1A75FF",
+        "blueSecondary": "#F0F6FF",
+        "blueDeep": "#002966",
+        "blueBackground": "#F2F7FF"
+
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        quicksand: ['Quicksand', 'Sans-Serif'],
+        Inter:['Inter', 'sans-serif']
       },
     },
   },
