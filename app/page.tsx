@@ -10,7 +10,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-blueBackground">
       <Navbar />
       <Hero />
-      <div className='px-8'>
+      <div className='px-24'>
         <IssueReportAll/>
         <ReportIssue/>
       </div>
