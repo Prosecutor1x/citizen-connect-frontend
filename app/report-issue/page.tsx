@@ -1,9 +1,24 @@
+'use client'
+
 import Navbar from '@/components/Navbar'
-import React from 'react'
+import React, { useState } from 'react'
 import { Input, Radio, RadioGroup, Select, Stack, Textarea } from '../lib/chakraui'
 import { IoIosAdd } from 'react-icons/io'
+import { IProblemData } from '@/Interface/ReportIinterface'
 
 const reportIssuePage = () => {
+    const [reportData, setReportData] = useState<IProblemData>({
+        title: "",
+        description: "",
+        type: "",
+        level: "low",
+        media: [],
+        location: "",
+        comments: [],
+        date: "",
+        issueRaiser: ""
+    })
+
     return (
         <div className='bg-blueBackground pb-6'>
             <Navbar />
@@ -18,16 +33,76 @@ const reportIssuePage = () => {
                             focusBorderColor="#1A75FF"
                             placeholder="Enter An Issue Title here"
                             size={'md'}
+                            value={reportData.title}
                             fontSize="base"
+                            onChange={(e) => setReportData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    title: e.target.value
+                                }
+                            })}
                         />
                     </section>
                     <section>
-                        <h2 className='text-xl mb-2'>Issue Status*</h2>
-                        <RadioGroup>
+                        <h2 className='text-xl mb-2'>Issue Type*</h2>
+                        <Select
+                            backgroundColor={'#FBFAFF'}
+                            placeholder='--select--'
+                            focusBorderColor="#1A75FF"
+                            size={'md'}
+                            value={reportData.type}
+                            onChange={(e) => setReportData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    type: e.target.value
+                                }
+                            })}
+                            fontSize="base">
+                            <option>
+                                Infrastructure Problems
+                            </option>
+                            <option>
+                                Sanitation and Waste Management
+                            </option>
+                            <option>
+                                Public Safety Concerns
+                            </option>
+                            <option>
+                                Environmental Issues
+                            </option>
+                            <option>
+                                Utility Services
+                            </option>
+                            <option>
+                                ransportation and Traffic
+                            </option>
+                            <option>
+                                Health and Public Health
+                            </option>
+                            <option>
+                                Noise or Nuisance Complaints
+                            </option>
+                            <option>
+                                Animal Control
+                            </option>
+                            <option>
+                                General Complaints or Suggestions
+                            </option>
+                        </Select>
+                    </section>
+                    <section>
+                        <h2 className='text-xl mb-2'>Issue Level*</h2>
+                        <RadioGroup value={reportData.level} onChange={(e) => setReportData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    level: e
+                                }
+                            })}>
+
                             <Stack direction='row' spacing={'5rem'}>
-                                <Radio value='1'><span className='px-4 py-2 bg-blue-500 rounded-md text-white font-semibold'>Low</span></Radio>
-                                <Radio value='2'><span className='px-4 py-2 bg-yellow-500 rounded-md text-white font-semibold'>Moderate</span></Radio>
-                                <Radio value='3'><span className='px-4 py-2 bg-red-500 rounded-md text-white font-semibold'>Severe</span></Radio>
+                                <Radio value='low'><span className='px-4 py-2 bg-blue-500 rounded-md text-white font-semibold'>Low</span></Radio>
+                                <Radio value='moderate'><span className='px-4 py-2 bg-yellow-500 rounded-md text-white font-semibold'>Moderate</span></Radio>
+                                <Radio value='severe'><span className='px-4 py-2 bg-red-500 rounded-md text-white font-semibold'>Severe</span></Radio>
                             </Stack>
                         </RadioGroup>
                     </section>
@@ -39,6 +114,13 @@ const reportIssuePage = () => {
                             placeholder="Enter a brief Description of the issue..."
                             size={'md'}
                             fontSize="base"
+                            value={reportData.description}
+                            onChange={(e) => setReportData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    description: e.target.value
+                                }
+                            })}
                         />
                     </section>
                     <section>
