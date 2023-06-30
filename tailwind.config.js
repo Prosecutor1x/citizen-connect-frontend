@@ -39,7 +39,8 @@ module.exports = {
         "bluePrimary": "#1A75FF",
         "blueSecondary": "#F0F6FF",
         "blueDeep": "#002966",
-        "blueBackground": "#F2F7FF"
+        "blueBackground": "#F2F7FF",
+        "lightTextColor": "#00184485"
 
       },
       fontFamily: {

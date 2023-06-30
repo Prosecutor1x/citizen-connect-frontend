@@ -13,7 +13,7 @@ const nunitoSans = Nunito_Sans({
 
 export const metadata = {
     title: 'Bongobashi a citizen connect app',
-    description: 'Made by Krishnarjun and Rupsha',
+    description: 'Made by Krishnarjun, Rupsha, Kingshuk and Mukesh',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
