@@ -18,7 +18,7 @@ html {
 @layer components {
   
   .btn-primary {
-    @apply bg-bluePrimary  text-sm md:text-base md:px-8 px-4 py-2 rounded-full text-white active:scale-95 transition-all duration-500 hover:bg-blueDeep hover:text-white;
+    @apply bg-bluePrimary  text-sm md:text-base md:px-8 px-4 py-2 rounded-full text-white active:scale-95 transition-all duration-500 hover:bg-blueDeep hover:text-white disabled:bg-slate-300 disabled:text-white;
   }
   .btn-secondary {
     @apply bg-blueSecondary  text-sm md:text-base md:px-8 px-4 py-2 rounded-full text-blueDeep border-2 border-blueDeep hover:border-none active:scale-95 transition-all duration-500 hover:bg-bluePrimary hover:text-white;
