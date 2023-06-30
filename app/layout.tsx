@@ -1,9 +1,9 @@
 import './globals.css'
-import { Inter, Merriweather, Quicksand } from 'next/font/google'
+import { Inter, Merriweather, Nunito_Sans } from 'next/font/google'
 import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
-const merriweather = Merriweather({
+const nunitoSans = Nunito_Sans({
     weight: ['400', '700'],
     style: ['normal'],
     subsets: ['latin'],
@@ -13,13 +13,13 @@ const merriweather = Merriweather({
 
 export const metadata = {
     title: 'Bongobashi a citizen connect app',
-    description: 'Made by Krishnarjun and Rupsha',
+    description: 'Made by Krishnarjun, Rupsha, Kingshuk and Mukesh',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={merriweather.className}>
+            <body className={nunitoSans.className}>
                 {' '}
                 <Providers>{children} </Providers>
             </body>
