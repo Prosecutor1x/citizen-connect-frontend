@@ -37,7 +37,7 @@ const AccountDetails = () => {
                         placeholder='Gender'
                         focusBorderColor="#1A75FF"
                         size={'md'}
-                        value={'Male'}
+                        defaultValue={'Male'}
                         fontSize="base">
                         <option>
                             Male

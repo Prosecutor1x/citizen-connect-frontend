@@ -7,5 +7,6 @@ export interface IProblemData{
     location:string;
     comments:string[]
     date:string,
-    issueRaiser:string
+    issueRaiser:string,
+    progress:string
 }
