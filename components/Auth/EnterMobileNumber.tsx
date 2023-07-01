@@ -2,22 +2,25 @@ import axios from "axios";
 import { InputGroup, InputLeftAddon, Input } from "../../app/lib/chakraui";
 import React, { useState } from "react";
 import { BsTelephone } from "react-icons/bs";
-import { baseUrl } from "@/baseUrl";
+import { sendOtp } from "@/functions/auth/sendOtp";
 
-const EnterMobileNumber = () => {
-  const [mobileNumber, setMobileNumber] = useState<string>();
+const EnterMobileNumber = ({ setIsOtpPage, setVerificationData, mobileNumber, setMobileNumber }: any) => {
 
   const handleGetOtp = async () => {
-    console.log("Mobile Number: ", mobileNumber);
     try {
-      const res = await axios.post(`${baseUrl}/api/sendOtp`, {
-        phone: `+91${mobileNumber}`,
-      });
-      console.log("Result: ", res.data);
+      if (mobileNumber) {
+        const responseData = await sendOtp(mobileNumber)
+        console.log(responseData);
+
+        setVerificationData({
+          VerificationResponse: responseData?.verificationResponse,
+          ServiceResponseParam: responseData?.serviceResponseParam
+        })
+      }
+      setIsOtpPage(true)
     } catch (err) {
       console.log(err);
     }
-    // TODO: Route to verify otp page
   };
 
   return (
