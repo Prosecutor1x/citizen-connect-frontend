@@ -17,6 +17,7 @@ const EnterMobileNumber = () => {
     } catch (err) {
       console.log(err);
     }
+    // TODO: Route to verify otp page
   };
 
   return (
