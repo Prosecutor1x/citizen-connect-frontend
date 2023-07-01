@@ -1,7 +1,7 @@
 "use client"
 import Hero from '@/components/Hero'
-import IssueReportAll from '@/components/IssueReport.tsx/IssueReportAll'
-import IssueReportCard from '@/components/IssueReport.tsx/issueReport.Card'
+import IssueReportAll from '@/components/IssueReport/IssueReportAll'
+import IssueReportCard from '@/components/IssueReport/issueReport.Card'
 import Navbar from '@/components/Navbar'
 import ReportIssue from '@/components/reportIssue'
 import Image from 'next/image'

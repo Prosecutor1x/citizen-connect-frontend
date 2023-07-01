@@ -25,7 +25,7 @@ html {
   }
   
   .anchor-custom {
-    @apply hover:underline underline-offset-4 text-white text-base cursor-pointer;
+    @apply underline underline-offset-4 text-bluePrimary text-base cursor-pointer;
   }
 
   .input-primary {
@@ -53,4 +53,8 @@ html {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #212121;
+}
+
+.shadow-custom{
+      box-shadow: 2px 0px 12px -5px #484848bd;
 }

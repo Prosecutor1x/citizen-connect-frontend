@@ -1,4 +1,3 @@
-import axios from "axios";
 import { InputGroup, InputLeftAddon, Input } from "../../app/lib/chakraui";
 import React, { useState } from "react";
 import { BsTelephone } from "react-icons/bs";
