@@ -1,17 +1,31 @@
 
+import { verifyOtp } from '@/functions/auth/verifyOtp'
 import { HStack, PinInput, PinInputField } from '../../app/lib/chakraui'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
-const VerifyOtp = () => {
-    const [timer, setTimer] = useState<number>(10)
-    const [otpEntered, setOtpEntered] = useState<number>()    
+const VerifyOtp = ({ verificationData, mobileNumber }: any) => {
+    const [timer, setTimer] = useState<number>(170)
+    const [otpEntered, setOtpEntered] = useState<string>()
 
     useEffect(() => {
         timer > -1 && setTimeout(() => {
-            timer 
+            timer
             setTimer(timer - 1)
         }, 1000)
     }, [timer])
+
+    const handleVerifyOtp = async () => {
+        try {
+            if (otpEntered && await verifyOtp(mobileNumber, otpEntered, verificationData?.VerificationResponse, verificationData?.ServiceResponseParam)){
+                
+                window.location.href='/'
+            }
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
 
     return (
         <div>
@@ -20,7 +34,7 @@ const VerifyOtp = () => {
             </h1>
             <p className='text-sm font-light text-[#00184485] mb-4'>An OTP has been sent to XXX XXX 8005</p>
             <HStack marginBottom={'15px'} spacing={'12px'}>
-                <PinInput size={'lg'} onChange={(e:any)=>setOtpEntered(e)}
+                <PinInput size={'lg'} onChange={(e: any) => setOtpEntered(e)}
                 >
                     <PinInputField />
                     <PinInputField />
@@ -30,8 +44,8 @@ const VerifyOtp = () => {
                     <PinInputField />
                 </PinInput>
             </HStack>
-            {timer === -1 ? <p className='w-full text-center mb-4 font-bold cursor-pointer text-blueDeep' onClick={()=>setTimer(10)}>Resend OTP</p> : <p className='text-bluePrimary text-center font-bold mb-4 text-xl'>{timer}</p>}
-            <button className='btn-primary w-full rounded-md mb-8'>Verify OTP & Proceed</button>
+            {timer === -1 ? <p className='w-full text-center mb-4 font-bold cursor-pointer text-blueDeep' onClick={() => setTimer(170)}>Resend OTP</p> : <p className='text-bluePrimary text-center font-bold mb-4 text-xl'>{timer}</p>}
+            <button className='btn-primary w-full rounded-md mb-8' disabled={otpEntered?.length !== 6} onClick={handleVerifyOtp}>Verify OTP & Proceed</button>
         </div>
 
     )
