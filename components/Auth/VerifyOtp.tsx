@@ -2,11 +2,15 @@
 import { verifyOtp } from '@/functions/auth/verifyOtp'
 import { HStack, PinInput, PinInputField } from '../../app/lib/chakraui'
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
+import { checkUser } from '@/functions/user/checkUser'
+import { useUser } from '@/context/userContext'
 
 const VerifyOtp = ({ verificationData, mobileNumber }: any) => {
     const [timer, setTimer] = useState<number>(170)
     const [otpEntered, setOtpEntered] = useState<string>()
+    const { setUser } = useUser()
+    const router = useRouter()
 
     useEffect(() => {
         timer > -1 && setTimeout(() => {
@@ -17,9 +21,14 @@ const VerifyOtp = ({ verificationData, mobileNumber }: any) => {
 
     const handleVerifyOtp = async () => {
         try {
-            if (otpEntered && await verifyOtp(mobileNumber, otpEntered, verificationData?.VerificationResponse, verificationData?.ServiceResponseParam)){
-                
-                window.location.href='/'
+            if (otpEntered && await verifyOtp(mobileNumber, otpEntered, verificationData?.VerificationResponse, verificationData?.ServiceResponseParam)) {
+                const userData = await checkUser(mobileNumber)
+                if (userData) {
+                    setUser(userData)
+                    router.push('/')
+                } else {
+                    router.push('/profile-create')
+                }
             }
         } catch (error) {
             console.log(error);

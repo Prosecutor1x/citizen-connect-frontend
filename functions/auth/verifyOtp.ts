@@ -13,6 +13,7 @@ export async function verifyOtp(mobileNumber: string, otp: string, VerificationR
         if (res.data.jwtToken) {
             window.sessionStorage.setItem("jwtToken", res.data.jwtToken)
         }
+        
         return (res.data.message === "Otp verified successfully")
 
     } catch (err) {
