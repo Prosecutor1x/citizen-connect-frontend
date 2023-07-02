@@ -1,13 +1,15 @@
+import { useUser } from '@/context/userContext'
 import { Avatar, Input, Select } from '../../app/lib/chakraui'
 import React from 'react'
 
 const AccountDetails = () => {
+    const {user} = useUser()
     return (
         <div className='space-y-6'>
             <section className='flex justify-start space-x-4 items-center '>
-                <Avatar name='kingshuk Sarkar' size='2xl' />
+                <Avatar name={user?.user_name} size='2xl' />
                 <div>
-                    <h1 className='text-2xl font-semibold'>Kingshuk Sarkar</h1>
+                    <h1 className='text-2xl font-semibold'>{user?.user_name}</h1>
                 </div>
             </section>
             <div className='grid grid-cols-5 gap-4 place-content-center items-center'>
@@ -23,6 +25,7 @@ const AccountDetails = () => {
                         placeholder="abc@gmail.com"
                         size={'md'}
                         fontSize="base"
+                        value={user?.user_email}
                     />
                 </section>
             </div>
@@ -37,7 +40,7 @@ const AccountDetails = () => {
                         placeholder='Gender'
                         focusBorderColor="#1A75FF"
                         size={'md'}
-                        defaultValue={'Male'}
+                        defaultValue={user?.gender}
                         fontSize="base">
                         <option>
                             Male
@@ -64,6 +67,7 @@ const AccountDetails = () => {
                         focusBorderColor="#1A75FF"
                         placeholder="Enter Age"
                         size={'md'}
+                        value={user?.user_age}
                         fontSize="base"
                     />
                 </section>
@@ -80,6 +84,7 @@ const AccountDetails = () => {
                         focusBorderColor="#1A75FF"
                         placeholder="Enter City/Town/Village"
                         size={'md'}
+                        value={user?.user_location}
                         fontSize="base"
                     />
                 </section>

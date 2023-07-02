@@ -1,7 +1,7 @@
 "use client"
 import Navbar from '@/components/Navbar'
-import AccountDetails from '@/components/Profile/AccountDetails'
-import IssueReported from '@/components/Profile/IssueReported'
+import AccountDetails from '@/components/profile/AccountDetails'
+import IssueReported from '@/components/profile/IssueReported'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
@@ -18,13 +18,13 @@ const user = () => {
             <Navbar />
             <div className='mx-8 py-6 min-h-[90vh] flex justify-between gap-8'>
                 <div className='max-w-[20vw] space-y-4 w-full'>
-                    <section className='cursor-pointer hover:scale-105 duration-200 flex bg-white justify-start items-center space-x-2 text-blueDeep px-4 py-2.5 shadow-lg font-medium rounded-lg' onClick={() => router.push('/profile/acaqcawqf?currentTab=personalDetails')}>
+                    <section className='cursor-pointer hover:scale-105 duration-200 flex bg-white justify-start items-center space-x-2 text-blueDeep px-4 py-2.5 shadow-lg font-medium rounded-lg' onClick={() => router.push('/profile?currentTab=personalDetails')}>
                         {
                             currentTab !== 'personalDetails' ? <AiOutlineUser size={'36px'} color='#1A75FF' /> : <FaUser size={'30px'} color='#1A75FF' />
                         }
                         <span>Account</span>
                     </section>
-                    <section className='cursor-pointer hover:scale-105 duration-200 flex bg-white justify-start items-center space-x-2 text-blueDeep px-4 py-2.5 shadow-lg font-medium rounded-lg' onClick={() => router.push('/profile/acaqcawqf?currentTab=issueReported')}>
+                    <section className='cursor-pointer hover:scale-105 duration-200 flex bg-white justify-start items-center space-x-2 text-blueDeep px-4 py-2.5 shadow-lg font-medium rounded-lg' onClick={() => router.push('/profile?currentTab=issueReported')}>
                         {
                             currentTab !== 'issueReported' ? <AiOutlineThunderbolt size={'36px'} color='#1A75FF' /> : <AiFillThunderbolt size={'36px'} color='#1A75FF' />
                         }

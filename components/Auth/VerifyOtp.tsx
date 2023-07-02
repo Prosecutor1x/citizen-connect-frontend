@@ -23,11 +23,11 @@ const VerifyOtp = ({ verificationData, mobileNumber }: any) => {
         try {
             if (otpEntered && await verifyOtp(mobileNumber, otpEntered, verificationData?.VerificationResponse, verificationData?.ServiceResponseParam)) {
                 const userData = await checkUser(mobileNumber)
-                if (userData) {
+                if (!userData) {
+                    router.push('/profile-create')
+                } else {
                     setUser(userData)
                     router.push('/')
-                } else {
-                    router.push('/profile-create')
                 }
             }
         } catch (error) {
