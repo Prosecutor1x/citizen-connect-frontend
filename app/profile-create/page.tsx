@@ -1,8 +1,45 @@
+"use client"
 import Navbar from '@/components/Navbar'
 import { Input, Select } from '../lib/chakraui'
-import React from 'react'
+import React, { useState } from 'react'
+import { IUser } from '@/Interface/UserInterface'
+import { decodeJWT } from '@/functions/decodeJwt'
+import { createUser } from '@/functions/user/createUser'
+import { useRouter } from 'next/navigation'
 
 const CreateProfile = () => {
+    const [userData, setUserData] = useState({
+        name: '',
+        email: '',
+        gender: '',
+        age: undefined,
+        location: '',
+    })
+    const jwtToken = window.sessionStorage.getItem('jwtToken') as string;
+    const router = useRouter()
+    const validateForm = () => {
+        if (userData.name !== "" && userData.age !== undefined && userData.email !== "" && userData.location !== "" && userData.gender) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    const handleCreateUser = async () => {
+        const phnNumber = decodeJWT(jwtToken)
+        const data = {
+            user_name: userData.name,
+            user_email: userData.email,
+            gender: userData.gender,
+            user_phone: phnNumber,
+            user_location: userData.location,
+            user_age: userData.age
+        }
+        await createUser(data as Partial<IUser>)
+        router.push('/')
+    }
+
+
     return (
         <div className='min-h-screen bg-blueBackground'>
             <Navbar />
@@ -19,6 +56,13 @@ const CreateProfile = () => {
                             focusBorderColor="#1A75FF"
                             placeholder="Enter your Name"
                             size={'md'}
+                            value={userData.name}
+                            onChange={(e) => setUserData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    name: e.target.value
+                                }
+                            })}
                             fontSize="base"
                         />
                     </section>
@@ -30,9 +74,16 @@ const CreateProfile = () => {
                             type="email"
                             backgroundColor={'#FBFAFF'}
                             focusBorderColor="#1A75FF"
-                            placeholder="Enter your Name"
+                            placeholder="Enter your Email id"
                             size={'md'}
                             fontSize="base"
+                            value={userData.email}
+                            onChange={(e) => setUserData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    email: e.target.value
+                                }
+                            })}
                         />
                     </section>
                     <section>
@@ -41,9 +92,16 @@ const CreateProfile = () => {
                         </h2>
                         <Select
                             backgroundColor={'#FBFAFF'}
-                            placeholder='Gender'
+                            placeholder='--select--'
                             focusBorderColor="#1A75FF"
                             size={'md'}
+                            value={userData.gender}
+                            onChange={(e) => setUserData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    gender: e.target.value
+                                }
+                            })}
                             fontSize="base">
                             <option>
                                 Male
@@ -62,11 +120,18 @@ const CreateProfile = () => {
                             Age
                         </h2>
                         <Input
-                            type="input"
+                            type="number"
                             backgroundColor={'#FBFAFF'}
                             focusBorderColor="#1A75FF"
                             placeholder="Enter Age"
                             size={'md'}
+                            value={userData.age}
+                            onChange={(e) => setUserData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    age: e.target.value
+                                }
+                            })}
                             fontSize="base"
                         />
                     </section>
@@ -80,10 +145,17 @@ const CreateProfile = () => {
                             focusBorderColor="#1A75FF"
                             placeholder="Enter City/Town/Village"
                             size={'md'}
+                            value={userData.location}
+                            onChange={(e) => setUserData((prev: any) => {
+                                return {
+                                    ...prev,
+                                    location: e.target.value
+                                }
+                            })}
                             fontSize="base"
                         />
                     </section>
-                    <button className='btn-primary w-full rounded-md'>Submit & Proceed</button>
+                    <button className='btn-primary w-full rounded-md' disabled={validateForm()} onClick={handleCreateUser}>Submit & Proceed</button>
                 </div>
             </div>
         </div>
