@@ -1,10 +1,12 @@
 import { useUser } from '@/context/userContext'
-import { Avatar } from '@chakra-ui/react'
+import { Avatar, Menu, MenuButton, MenuItem, MenuList } from '../app/lib/chakraui'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
+import { Logout } from '@/functions/auth/logout'
 
 const Navbar = () => {
+    const [open, setOpen] = useState<boolean>(false)
     const { user } = useUser()
     const router = useRouter()
     return (
@@ -21,20 +23,30 @@ const Navbar = () => {
                 <ul className='cursor-pointer hover:scale-105 transition-all duration-150'>
                     Dashboard
                 </ul>
-                <ul className='cursor-pointer hover:scale-105 transition-all duration-150'>
+                <ul className='cursor-pointer hover:scale-105 transition-all duration-150' onClick={() => router.push('/report-issue')}>
                     Issue Report
                 </ul>
                 <ul className='cursor-pointer hover:scale-105 transition-all duration-150'>
                     Help
                 </ul>
                 {
-                    user ? <Avatar name={user.user_name} size={'sm'} cursor={'pointer'} onClick={()=>router.push('/profile?currentTab=personalDetails')}/> : <button className='btn-primary'>
+                    user ? <Menu>
+                        <MenuButton>
+                            <Avatar name={user.user_name} size={'sm'} cursor={'pointer'} onClick={() => setOpen(true)} />
+                        </MenuButton>
+                        <MenuList fontWeight={'400'}>
+                            <MenuItem onClick={() => router.push('/profile?currentTab=personalDetails')}>Profile</MenuItem>
+                            <MenuItem onClick={() => Logout()}>Logout</MenuItem>
+                        </MenuList>
+
+                    </Menu> : <button className='btn-primary'>
                         <Link href='/auth/login'>
                             Register/Login
                         </Link>
                     </button>
                 }
             </li>
+
         </div>
     )
 }

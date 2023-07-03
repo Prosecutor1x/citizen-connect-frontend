@@ -35,11 +35,9 @@ const CreateProfile = () => {
             user_location: userData.location,
             user_age: userData.age
         }
-
-        console.log(data);
         
         await createUser(data as Partial<IUser>)
-        // router.push('/')
+        router.push('/')
     }
 
 

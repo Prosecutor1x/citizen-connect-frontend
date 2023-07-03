@@ -3,10 +3,10 @@ export interface IProblemData{
     description:string,
     type:string,
     level:"low"|"moderate"| "severe"
-    media:string[]
+    media?:string[]
     location:string;
-    comments:string[]
-    date:string,
+    comments?:string[]
+    date:number,
     issueRaiser:string,
-    progress:string
+    progress?:string
 }
