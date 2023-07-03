@@ -5,9 +5,7 @@ import axios from 'axios'
 export async function createUser(userData:Partial<IUser>) {
     
     try {
-        const res = await axios.post(`${baseUrl}/api/createUser`, {
-            
-        })
+        const res = await axios.post(`${baseUrl}/api/createUser`, userData)
         return res.data
     } catch (err: any) {
         console.log(err)

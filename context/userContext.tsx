@@ -41,12 +41,6 @@ export function UserContextProvider({ children }: any) {
     }, [])
 
     useEffect(() => {
-        if (jwtToken === undefined || jwtToken === null) {
-            router.push('/auth/login')
-        }
-    }, [jwtToken])
-
-    useEffect(() => {
         getUserData()
     }, [getUserData])
 

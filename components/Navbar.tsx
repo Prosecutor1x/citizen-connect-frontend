@@ -1,7 +1,14 @@
+import { useUser } from '@/context/userContext'
+import { Avatar, Menu, MenuButton, MenuItem, MenuList } from '../app/lib/chakraui'
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { Logout } from '@/functions/auth/logout'
 
 const Navbar = () => {
+    const [open, setOpen] = useState<boolean>(false)
+    const { user } = useUser()
+    const router = useRouter()
     return (
         <div className='h-20 px-8 py-4 flex justify-between items-center text-blueDeep font-semibold bg-white shadow-lg'>
             <Link href='/'>
@@ -16,19 +23,30 @@ const Navbar = () => {
                 <ul className='cursor-pointer hover:scale-105 transition-all duration-150'>
                     Dashboard
                 </ul>
-                <ul className='cursor-pointer hover:scale-105 transition-all duration-150'>
+                <ul className='cursor-pointer hover:scale-105 transition-all duration-150' onClick={() => router.push('/report-issue')}>
                     Issue Report
                 </ul>
                 <ul className='cursor-pointer hover:scale-105 transition-all duration-150'>
                     Help
                 </ul>
-                <button className='btn-primary'>
-                    <Link href='/auth/login'>
-                        Register/Login
-                    </Link>
+                {
+                    user ? <Menu>
+                        <MenuButton>
+                            <Avatar name={user.user_name} size={'sm'} cursor={'pointer'} onClick={() => setOpen(true)} />
+                        </MenuButton>
+                        <MenuList fontWeight={'400'}>
+                            <MenuItem onClick={() => router.push('/profile?currentTab=personalDetails')}>Profile</MenuItem>
+                            <MenuItem onClick={() => Logout()}>Logout</MenuItem>
+                        </MenuList>
 
-                </button>
+                    </Menu> : <button className='btn-primary'>
+                        <Link href='/auth/login'>
+                            Register/Login
+                        </Link>
+                    </button>
+                }
             </li>
+
         </div>
     )
 }

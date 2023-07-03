@@ -5,9 +5,11 @@ import React, { useState } from 'react'
 import { Input, Radio, RadioGroup, Select, Stack, Textarea } from '../lib/chakraui'
 import { IoIosAdd } from 'react-icons/io'
 import { IProblemData } from '@/Interface/ReportIinterface'
+import { report } from 'process'
+import { addnewIssue } from '@/functions/issueReport.tsx/addNewIssue'
 
 const reportIssuePage = () => {
-    const [reportData, setReportData] = useState<IProblemData>({
+    const [reportData, setReportData] = useState<Partial<IProblemData>>({
         title: "",
         description: "",
         type: "",
@@ -15,9 +17,34 @@ const reportIssuePage = () => {
         media: [],
         location: "",
         comments: [],
-        date: "",
+        date: NaN,
         issueRaiser: ""
     })
+
+
+    const validateForm = () => {
+        if (reportData.title !== "" && reportData.description !== undefined && reportData.type !== "" && reportData.level !== undefined) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    const handleSubmitReport = async () => {
+        const data = {
+            title: reportData.title,
+            description: reportData.description,
+            type: reportData.type,
+            level: reportData.level,
+            media: [],
+            location: "",
+            comments: [],
+            date: Date.now(),
+            issueRaiser: ""
+        }
+
+        await addnewIssue(data as IProblemData)
+    }
 
     return (
         <div className='bg-blueBackground pb-6'>
@@ -93,11 +120,11 @@ const reportIssuePage = () => {
                     <section>
                         <h2 className='text-xl mb-2'>Issue Level*</h2>
                         <RadioGroup value={reportData.level} onChange={(e) => setReportData((prev: any) => {
-                                return {
-                                    ...prev,
-                                    level: e
-                                }
-                            })}>
+                            return {
+                                ...prev,
+                                level: e
+                            }
+                        })}>
 
                             <Stack direction='row' spacing={'5rem'}>
                                 <Radio value='low'><span className='px-4 py-2 bg-blue-500 rounded-md text-white font-semibold'>Low</span></Radio>
@@ -185,7 +212,7 @@ const reportIssuePage = () => {
                 </div>
                 <div className='flex justify-end items-center space-x-8'>
                     <button className='btn-secondary'>Cancel</button>
-                    <button className='btn-primary'>Save</button>
+                    <button className='btn-primary' disabled={validateForm()} onClick={handleSubmitReport}>Save</button>
                 </div>
             </div>
         </div>
