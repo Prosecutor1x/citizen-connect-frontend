@@ -6,9 +6,8 @@ import { Input, Radio, RadioGroup, Select, Stack, Textarea } from '../lib/chakra
 import { IoIosAdd } from 'react-icons/io'
 import { IProblemData } from '@/Interface/ReportIinterface'
 import { addnewIssue } from '@/functions/issueReport.tsx/addNewIssue'
-import { FaMapMarkerAlt } from 'react-icons/fa'
-import Map, { Layer, Marker } from 'react-map-gl';
-import axios from 'axios'
+import Map from 'react-map-gl';
+import getSearchedPLaces from '@/functions/getSearchedPlaces'
 
 const reportIssuePage = () => {
     const [reportData, setReportData] = useState<Partial<IProblemData>>({
@@ -27,7 +26,6 @@ const reportIssuePage = () => {
         long: 88.3639
     })
     const [searchedLocationData, setSearchedLocationData] = useState<any>([])
-
 
     const validateForm = () => {
         if (reportData.title !== "" && reportData.description !== undefined && reportData.type !== "" && reportData.level !== undefined) {
@@ -53,17 +51,9 @@ const reportIssuePage = () => {
         await addnewIssue(data as IProblemData)
     }
 
-    console.log(searchedLocation);
-
-
-
     const getPlaces = async (location: string) => {
-        try {
-            const res = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=pk.eyJ1Ijoia2luZ3NhcmthcjMwMDYiLCJhIjoiY2xqb2VvNGt6MHloejNzbjN2MnVma3I4dyJ9.mNV9n2t42a5qidyuwUzE-g&autocomplete=true&limit=4`)
-            setSearchedLocationData(res.data)
-        } catch (err) {
-            console.log(err)
-        }
+        const data = await getSearchedPLaces(location)
+        data && setSearchedLocationData(data)
     }
     return (
         <div className='bg-blueBackground pb-6'>
@@ -182,10 +172,10 @@ const reportIssuePage = () => {
                                 fontSize="base"
                                 value={reportData.location}
                                 onChange={(e) => {
-                                    setReportData((prev:any)=>{
-                                        return{
+                                    setReportData((prev: any) => {
+                                        return {
                                             ...prev,
-                                            location:e.target.value
+                                            location: e.target.value
                                         }
                                     })
                                     getPlaces(e.target.value)
@@ -197,10 +187,10 @@ const reportIssuePage = () => {
                                         return <div key={i} className='bg-[#FBFAFF] px-4 py-2 cursor-pointer hover:bg-[#c1c0c5] rounded-md' onClick={() => {
                                             setSearchedLocationData([])
                                             setSearchedLocation({ lat: loc.center[1], long: loc.center[0] })
-                                            setReportData((prev:any)=>{
-                                                return{
+                                            setReportData((prev: any) => {
+                                                return {
                                                     ...prev,
-                                                    location:loc.place_name
+                                                    location: loc.place_name
                                                 }
                                             })
                                         }}>{loc.place_name}</div>
