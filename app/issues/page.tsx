@@ -62,7 +62,7 @@ const Issues = () => {
 
             //   </div>
             // )
-            <div className='my-6' >
+            <div className='my-6' key={id}>
               <IssueCard
                 issuetitle={data.issuetitle}
                 issuedate={data.issuedate}
