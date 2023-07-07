@@ -1,12 +1,12 @@
 export interface IUser {
     UserId: string
-    user_name: string
-    user_email: string
+    username: string
+    useremail: string
     gender: string
-    user_phone: string
+    userphone: string
     UserProfilePhoto?: string
-    user_location: string
-    user_age: number
+    userlocation: string
+    userage: number
     UserVerified?: boolean
     UserIdProof?: string
 }

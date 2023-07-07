@@ -8,7 +8,7 @@ const IssueReported = () => {
             <div className='space-y-6'>
                 <ReportIssueCard
                     title={'Severe Potholes in the Road of 26 Block'}
-                    date={'12/06/2023'} 
+                    date={1} 
                     level={'severe'}
                     description={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. standard dummy text ever since the 150 only five..."}
                     location={'Belgharia'}
@@ -16,7 +16,7 @@ const IssueReported = () => {
                     />
                 <ReportIssueCard
                     title={'Severe Potholes in the Road of 26 Block'}
-                    date={'12/06/2023'} 
+                    date={2} 
                     level={'low'}
                     description={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. standard dummy text ever since the 150 only five..."}
                     location={'Belgharia'}
@@ -24,7 +24,7 @@ const IssueReported = () => {
                     />
                 <ReportIssueCard
                     title={'Severe Potholes in the Road of 26 Block'}
-                    date={'12/06/2023'} 
+                    date={3} 
                     level={'moderate'}
                     description={"Lorem Ipsum is simply dummy text of the printing and typesetting industry. standard dummy text ever since the 150 only five..."}
                     location={'Belgharia'}
