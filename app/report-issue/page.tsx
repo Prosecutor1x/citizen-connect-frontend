@@ -11,15 +11,15 @@ import getSearchedPLaces from '@/functions/getSearchedPlaces'
 
 const reportIssuePage = () => {
     const [reportData, setReportData] = useState<Partial<IProblemData>>({
-        title: "",
-        description: "",
-        type: "",
-        level: "low",
-        media: [],
-        location: "",
-        comments: [],
-        date: NaN,
-        issueRaiser: ""
+        issuetitle: "",
+        issuedescription: "",
+        issuetype: "",
+        issuelevel: "low",
+        issuemedia: [],
+        issuelocation: "",
+        issuecomments: [],
+        issuedate: NaN,
+        issueissueRaiser: ""
     })
     const [searchedLocation, setSearchedLocation] = useState<{ lat: number, long: number }>({
         lat: 22.5726,
@@ -28,7 +28,7 @@ const reportIssuePage = () => {
     const [searchedLocationData, setSearchedLocationData] = useState<any>([])
 
     const validateForm = () => {
-        if (reportData.title !== "" && reportData.description !== undefined && reportData.type !== "" && reportData.level !== undefined) {
+        if (reportData.issuetitle !== "" && reportData.issuedescription !== undefined && reportData.issuetype !== "" && reportData.issuelevel !== undefined) {
             return false
         } else {
             return true
@@ -37,15 +37,15 @@ const reportIssuePage = () => {
 
     const handleSubmitReport = async () => {
         const data = {
-            title: reportData.title,
-            description: reportData.description,
-            type: reportData.type,
-            level: reportData.level,
-            media: [],
-            location: "",
-            comments: [],
-            date: Date.now(),
-            issueRaiser: ""
+            issuetitle: reportData.issuetitle,
+            issuedescription: reportData.issuedescription,
+            issuetype: reportData.issuetype,
+            issuelevel: reportData.issuelevel,
+            issuemedia: [],
+            issuelocation: "",
+            issuecomments: [],
+            issuedate: Date.now(),
+            issueissueRaiser: ""
         }
 
         await addnewIssue(data as IProblemData)
@@ -70,7 +70,7 @@ const reportIssuePage = () => {
                             focusBorderColor="#1A75FF"
                             placeholder="Enter An Issue Title here"
                             size={'md'}
-                            value={reportData.title}
+                            value={reportData.issuetitle}
                             fontSize="base"
                             onChange={(e) => setReportData((prev: any) => {
                                 return {
@@ -87,7 +87,7 @@ const reportIssuePage = () => {
                             placeholder='--select--'
                             focusBorderColor="#1A75FF"
                             size={'md'}
-                            value={reportData.type}
+                            value={reportData.issuetype}
                             onChange={(e) => setReportData((prev: any) => {
                                 return {
                                     ...prev,
@@ -129,7 +129,7 @@ const reportIssuePage = () => {
                     </section>
                     <section>
                         <h2 className='text-xl mb-2'>Issue Level*</h2>
-                        <RadioGroup value={reportData.level} onChange={(e) => setReportData((prev: any) => {
+                        <RadioGroup value={reportData.issuelevel} onChange={(e) => setReportData((prev: any) => {
                             return {
                                 ...prev,
                                 level: e
@@ -151,7 +151,7 @@ const reportIssuePage = () => {
                             placeholder="Enter a brief Description of the issue..."
                             size={'md'}
                             fontSize="base"
-                            value={reportData.description}
+                            value={reportData.issuedescription}
                             onChange={(e) => setReportData((prev: any) => {
                                 return {
                                     ...prev,
@@ -170,7 +170,7 @@ const reportIssuePage = () => {
                                 placeholder="Search Your Location"
                                 size={'md'}
                                 fontSize="base"
-                                value={reportData.location}
+                                value={reportData.issuelocation}
                                 onChange={(e) => {
                                     setReportData((prev: any) => {
                                         return {

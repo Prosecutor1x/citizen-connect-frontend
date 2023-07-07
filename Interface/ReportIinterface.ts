@@ -1,12 +1,12 @@
 export interface IProblemData{
-    title:string,
-    description:string,
-    type:string,
-    level:"low"|"moderate"| "severe"
-    media?:string[]
-    location:string;
-    comments?:string[]
-    date:number,
-    issueRaiser:string,
-    progress?:string
+    issuetitle:string,
+    issuedescription:string,
+    issuetype:string,
+    issuelevel:"low"|"moderate"| "severe"
+    issuemedia?:string[]
+    issuelocation:string;
+    issuecomments?:string[]
+    issuedate:number,
+    issueissueRaiser:string,
+    issueprogress?:string
 }

@@ -7,9 +7,9 @@ const AccountDetails = () => {
     return (
         <div className='space-y-6'>
             <section className='flex justify-start space-x-4 items-center '>
-                <Avatar name={user?.user_name} size='2xl' />
+                <Avatar name={user?.username} size='2xl' />
                 <div>
-                    <h1 className='text-2xl font-semibold'>{user?.user_name}</h1>
+                    <h1 className='text-2xl font-semibold'>{user?.username}</h1>
                 </div>
             </section>
             <div className='grid grid-cols-5 gap-4 place-content-center items-center'>
@@ -25,7 +25,7 @@ const AccountDetails = () => {
                         placeholder="abc@gmail.com"
                         size={'md'}
                         fontSize="base"
-                        value={user?.user_email}
+                        value={user?.useremail}
                     />
                 </section>
             </div>
@@ -67,7 +67,7 @@ const AccountDetails = () => {
                         focusBorderColor="#1A75FF"
                         placeholder="Enter Age"
                         size={'md'}
-                        value={user?.user_age}
+                        value={user?.userage}
                         fontSize="base"
                     />
                 </section>
@@ -84,7 +84,7 @@ const AccountDetails = () => {
                         focusBorderColor="#1A75FF"
                         placeholder="Enter City/Town/Village"
                         size={'md'}
-                        value={user?.user_location}
+                        value={user?.userlocation}
                         fontSize="base"
                     />
                 </section>

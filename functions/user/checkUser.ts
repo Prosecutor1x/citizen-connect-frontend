@@ -2,7 +2,6 @@ import { baseUrl } from '@/baseUrl'
 import axios from 'axios'
 
 export async function checkUser(mobileNumber: string) {
-    console.log(mobileNumber);
     
     try {
         const res = await axios.post(`${baseUrl}/api/checkUser`, {
