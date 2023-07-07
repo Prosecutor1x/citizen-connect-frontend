@@ -1,11 +1,39 @@
-import React from 'react'
+'use client'
+import { IIssueData } from '@/Interface/ReportIinterface'
+import Navbar from '@/components/Navbar'
+import { getSingleIssue } from '@/functions/issues/getSingleIssue'
+import React, {useEffect, useState } from 'react'
 
-type Props = {}
 
-const Hello = (props: Props) => {
+const Issue = ({params}:any ) => {
+
+  const issueId = params.issueid
+  const [issue, setIssue] = useState<IIssueData>([])
+
+
+  useEffect(() => {
+    handleGetSingleIssues()
+  }, [])
+
+  const handleGetSingleIssues = async () => {
+    try {
+      const res = await getSingleIssue(issueId)
+      setIssue(res)
+      console.log(res)
+      
+    } catch (err: any) {
+      console.log(err)
+    }
+  }  
+
   return (
-    <div>Hello</div>
+
+    <div  >
+      <Navbar/>
+
+      <h1>{issue.issuetitle}</h1>
+    </div>
   )
 }
 
-export default Hello
+export default Issue
