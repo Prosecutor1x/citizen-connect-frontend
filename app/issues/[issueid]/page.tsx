@@ -8,7 +8,7 @@ import React, {useEffect, useState } from 'react'
 const Issue = ({params}:any ) => {
 
   const issueId = params.issueid
-  const [issue, setIssue] = useState<IIssueData>([])
+  const [issue, setIssue] = useState<IIssueData>()
 
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const Issue = ({params}:any ) => {
     <div  >
       <Navbar/>
 
-      <h1>{issue.issuetitle}</h1>
+      <h1>{issue?.issuetitle}</h1>
     </div>
   )
 }
