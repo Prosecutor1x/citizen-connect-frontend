@@ -1,4 +1,4 @@
-import { IProblemData } from '@/Interface/ReportIinterface'
+import { IIssueData } from '@/Interface/ReportIinterface'
 import { format, intervalToDuration } from 'date-fns'
 import React from 'react'
 import { BsGraphUp } from 'react-icons/bs'
@@ -12,7 +12,6 @@ const ReportIssueCard = ({ title, date, description, location, progress, level }
             <section className='flex justify-between mb-1'>
                 <h2 className='text-lg'>{title}</h2>
                 <span className='font-medium'>{format(parseInt(date), "PP")}</span>
-                
             </section>
             <h4 className='text-base font-light text-[#00184485] mb-3'>{daysPassed.days} days Ago</h4>
             <section className='flex justify-start items-center gap-8 mb-3'>

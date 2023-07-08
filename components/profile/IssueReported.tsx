@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import ReportIssueCard from '../Problem/ReportIssueCard'
-import { IProblemData } from '@/Interface/ReportIinterface'
+import { IIssueData } from '@/Interface/ReportIinterface'
 import { fetchAllIssue } from '@/functions/issueReport.tsx/fetchAllIssue'
 
 const IssueReported = () => {
-    const [issueAll, setIssueAll] = useState<IProblemData[]>([])
+    const [issueAll, setIssueAll] = useState<IIssueData[]>([])
 
     useEffect(() => {
         getAllIssue()
@@ -15,7 +15,7 @@ const IssueReported = () => {
 
     const getAllIssue = async () => {
         const data = await fetchAllIssue()
-        setIssueAll(data as IProblemData[])
+        setIssueAll(data as IIssueData[])
     }
     return (
         <div>

@@ -4,13 +4,13 @@ import Navbar from '@/components/Navbar'
 import React, { useState } from 'react'
 import { Input, Radio, RadioGroup, Select, Stack, Textarea } from '../lib/chakraui'
 import { IoIosAdd } from 'react-icons/io'
-import { IProblemData } from '@/Interface/ReportIinterface'
+import { IIssueData } from '@/Interface/ReportIinterface'
 import { addnewIssue } from '@/functions/issueReport.tsx/addNewIssue'
 import Map from 'react-map-gl';
 import getSearchedPLaces from '@/functions/getSearchedPlaces'
 
 const reportIssuePage = () => {
-    const [reportData, setReportData] = useState<Partial<IProblemData>>({
+    const [reportData, setReportData] = useState<Partial<IIssueData>>({
         issuetitle: "",
         issuedescription: "",
         issuetype: "",
@@ -19,7 +19,7 @@ const reportIssuePage = () => {
         issuelocation: "",
         issuecomments: [],
         issuedate: NaN,
-        issueissueRaiser: ""
+        issueRaiser: ""
     })
     const [searchedLocation, setSearchedLocation] = useState<{ lat: number, long: number }>({
         lat: 22.5726,
@@ -45,10 +45,10 @@ const reportIssuePage = () => {
             issuelocation: "",
             issuecomments: [],
             issuedate: Date.now(),
-            issueissueRaiser: ""
+            issueRaiser: ""
         }
 
-        await addnewIssue(data as IProblemData)
+        await addnewIssue(data as IIssueData)
     }
 
     const getPlaces = async (location: string) => {
@@ -65,7 +65,6 @@ const reportIssuePage = () => {
                         <h2 className='text-xl mb-2'>Title*</h2>
                         <Input
                             type="text"
-
                             backgroundColor={'#FBFAFF'}
                             focusBorderColor="#1A75FF"
                             placeholder="Enter An Issue Title here"

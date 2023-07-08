@@ -1,4 +1,4 @@
-import { IProblemData } from "@/Interface/ReportIinterface"
+import { IIssueData } from "@/Interface/ReportIinterface"
 import { baseUrl } from "@/baseUrl"
 import axios from "axios"
 
