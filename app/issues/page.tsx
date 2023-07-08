@@ -1,5 +1,5 @@
 'use client';
-import { IIssueData, IProblemData } from '@/Interface/ReportIinterface';
+import { IIssueData } from '@/Interface/ReportIinterface';
 import Navbar from '@/components/Navbar'
 import IssueCard from '@/components/Problem/IssueCard';
 

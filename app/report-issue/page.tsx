@@ -4,26 +4,31 @@ import Navbar from '@/components/Navbar'
 import React, { useState } from 'react'
 import { Input, Radio, RadioGroup, Select, Stack, Textarea } from '../lib/chakraui'
 import { IoIosAdd } from 'react-icons/io'
-import { IProblemData } from '@/Interface/ReportIinterface'
-import { report } from 'process'
+import { IIssueData } from '@/Interface/ReportIinterface'
 import { addnewIssue } from '@/functions/issueReport.tsx/addNewIssue'
+import Map from 'react-map-gl';
+import getSearchedPLaces from '@/functions/getSearchedPlaces'
 
 const reportIssuePage = () => {
-    const [reportData, setReportData] = useState<Partial<IProblemData>>({
-        title: "",
-        description: "",
-        type: "",
-        level: "low",
-        media: [],
-        location: "",
-        comments: [],
-        date: NaN,
+    const [reportData, setReportData] = useState<Partial<IIssueData>>({
+        issuetitle: "",
+        issuedescription: "",
+        issuetype: "",
+        issuelevel: "low",
+        issuemedia: [],
+        issuelocation: "",
+        issuecomments: [],
+        issuedate: NaN,
         issueRaiser: ""
     })
-
+    const [searchedLocation, setSearchedLocation] = useState<{ lat: number, long: number }>({
+        lat: 22.5726,
+        long: 88.3639
+    })
+    const [searchedLocationData, setSearchedLocationData] = useState<any>([])
 
     const validateForm = () => {
-        if (reportData.title !== "" && reportData.description !== undefined && reportData.type !== "" && reportData.level !== undefined) {
+        if (reportData.issuetitle !== "" && reportData.issuedescription !== undefined && reportData.issuetype !== "" && reportData.issuelevel !== undefined) {
             return false
         } else {
             return true
@@ -32,20 +37,24 @@ const reportIssuePage = () => {
 
     const handleSubmitReport = async () => {
         const data = {
-            title: reportData.title,
-            description: reportData.description,
-            type: reportData.type,
-            level: reportData.level,
-            media: [],
-            location: "",
-            comments: [],
-            date: Date.now(),
+            issuetitle: reportData.issuetitle,
+            issuedescription: reportData.issuedescription,
+            issuetype: reportData.issuetype,
+            issuelevel: reportData.issuelevel,
+            issuemedia: [],
+            issuelocation: "",
+            issuecomments: [],
+            issuedate: Date.now(),
             issueRaiser: ""
         }
 
-        await addnewIssue(data as IProblemData)
+        await addnewIssue(data as IIssueData)
     }
 
+    const getPlaces = async (location: string) => {
+        const data = await getSearchedPLaces(location)
+        data && setSearchedLocationData(data)
+    }
     return (
         <div className='bg-blueBackground pb-6'>
             <Navbar />
@@ -60,7 +69,7 @@ const reportIssuePage = () => {
                             focusBorderColor="#1A75FF"
                             placeholder="Enter An Issue Title here"
                             size={'md'}
-                            value={reportData.title}
+                            value={reportData.issuetitle}
                             fontSize="base"
                             onChange={(e) => setReportData((prev: any) => {
                                 return {
@@ -77,7 +86,7 @@ const reportIssuePage = () => {
                             placeholder='--select--'
                             focusBorderColor="#1A75FF"
                             size={'md'}
-                            value={reportData.type}
+                            value={reportData.issuetype}
                             onChange={(e) => setReportData((prev: any) => {
                                 return {
                                     ...prev,
@@ -119,7 +128,7 @@ const reportIssuePage = () => {
                     </section>
                     <section>
                         <h2 className='text-xl mb-2'>Issue Level*</h2>
-                        <RadioGroup value={reportData.level} onChange={(e) => setReportData((prev: any) => {
+                        <RadioGroup value={reportData.issuelevel} onChange={(e) => setReportData((prev: any) => {
                             return {
                                 ...prev,
                                 level: e
@@ -141,7 +150,7 @@ const reportIssuePage = () => {
                             placeholder="Enter a brief Description of the issue..."
                             size={'md'}
                             fontSize="base"
-                            value={reportData.description}
+                            value={reportData.issuedescription}
                             onChange={(e) => setReportData((prev: any) => {
                                 return {
                                     ...prev,
@@ -150,48 +159,62 @@ const reportIssuePage = () => {
                             })}
                         />
                     </section>
-                    <section>
-                        <h2 className='text-xl mb-2'>Location*</h2>
-                        <div className='justify-between items-center flex space-x-8'>
-                            <section className='w-full space-y-2'>
-                                <h3 className='text-lg'>District</h3>
-                                <Select
-                                    backgroundColor={'#FBFAFF'}
-                                    placeholder='--select--'
-                                    focusBorderColor="#1A75FF"
-                                    size={'md'}
-                                    fontSize="base">
-                                    <option>
-                                        Male
-                                    </option>
-                                    <option>
-                                        Female
-                                    </option>
-                                    <option>
-                                        Trans
-                                    </option>
-                                </Select>
-                            </section>
-                            <section className='w-full space-y-2'>
-                                <h3 className='text-lg'>Division</h3>
-                                <Select
-                                    backgroundColor={'#FBFAFF'}
-                                    placeholder='--select--'
-                                    focusBorderColor="#1A75FF"
-                                    size={'md'}
-                                    fontSize="base">
-                                    <option>
-                                        Male
-                                    </option>
-                                    <option>
-                                        Female
-                                    </option>
-                                    <option>
-                                        Trans
-                                    </option>
-                                </Select>
-                            </section>
-                        </div>
+                    <section className='space-y-2'>
+                        <h2 className='text-xl'>Location*</h2>
+                        <section className='w-full space-y-2 relative'>
+                            <Input
+                                type="text"
+                                backgroundColor={'#FBFAFF'}
+                                focusBorderColor="#1A75FF"
+                                placeholder="Search Your Location"
+                                size={'md'}
+                                fontSize="base"
+                                value={reportData.issuelocation}
+                                onChange={(e) => {
+                                    setReportData((prev: any) => {
+                                        return {
+                                            ...prev,
+                                            location: e.target.value
+                                        }
+                                    })
+                                    getPlaces(e.target.value)
+                                }}
+                            />
+                            <div className='w-full py-2 rounded-md absolute top-7 left-0 z-10'>
+                                {
+                                    searchedLocationData.features?.map((loc: any, i: number) => {
+                                        return <div key={i} className='bg-[#FBFAFF] px-4 py-2 cursor-pointer hover:bg-[#c1c0c5] rounded-md' onClick={() => {
+                                            setSearchedLocationData([])
+                                            setSearchedLocation({ lat: loc.center[1], long: loc.center[0] })
+                                            setReportData((prev: any) => {
+                                                return {
+                                                    ...prev,
+                                                    location: loc.place_name
+                                                }
+                                            })
+                                        }}>{loc.place_name}</div>
+                                    })
+                                }
+                            </div>
+                        </section>
+                        {/* Map integration */}
+                        <Map
+                            latitude={searchedLocation.lat}
+                            longitude={searchedLocation.long}
+
+                            mapboxAccessToken={'pk.eyJ1Ijoia2luZ3NhcmthcjMwMDYiLCJhIjoiY2xqb2VvNGt6MHloejNzbjN2MnVma3I4dyJ9.mNV9n2t42a5qidyuwUzE-g'}
+                            mapLib={import('mapbox-gl')}
+                            initialViewState={{
+                                latitude: searchedLocation.lat,
+                                longitude: searchedLocation.long,
+                                zoom: 12
+                            }}
+                            style={{ width: 'screen', height: 400 }}
+                            mapStyle="mapbox://styles/mapbox/streets-v9"
+                        >
+
+                        </Map>
+
                     </section>
                     <section>
                         <h2 className='text-xl mb-1'>Add Media</h2>

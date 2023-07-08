@@ -33,7 +33,7 @@ const Navbar = () => {
                 {
                     user ? <Menu>
                         <MenuButton>
-                            <Avatar name={user.user_name} size={'sm'} cursor={'pointer'} onClick={() => setOpen(true)} />
+                            <Avatar name={user.username} size={'sm'} cursor={'pointer'} onClick={() => setOpen(true)} />
                         </MenuButton>
                         <MenuList fontWeight={'400'}>
                             <MenuItem onClick={() => router.push('/profile?currentTab=personalDetails')}>Profile</MenuItem>

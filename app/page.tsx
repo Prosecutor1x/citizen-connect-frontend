@@ -7,6 +7,10 @@ import ReportIssue from '@/components/reportIssue'
 import { useUser } from '@/context/userContext'
 
 export default function Home() {
+  const {user} = useUser()
+
+  console.log(user);
+  
 
   return (
     <div className="flex min-h-screen flex-col bg-blueBackground">

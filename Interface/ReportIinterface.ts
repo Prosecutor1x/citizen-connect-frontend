@@ -1,15 +1,4 @@
-export interface IProblemData{
-    title:string,
-    description:string,
-    type:string,
-    level:"low"|"moderate"| "severe"
-    media?:string[]
-    location:string;
-    comments?:ICommentData[]
-    date:number,
-    issueRaiser:string,
-    progress?:string
-}
+
 
 export interface ICommentData{
     body:string,
