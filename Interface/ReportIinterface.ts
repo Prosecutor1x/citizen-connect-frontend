@@ -15,9 +15,12 @@ export interface IIssueData{
     issuemedia?:string[]
     issuelocation:IIssueLocation;
     issuecomments?:ICommentData[]
-    issuedate:number,
+    issuedate:string,
     issueRaiser:string,
+    issueRaiserName?:string,
+    issueraiserid:string
     issueprogress?:string
+    issueimages:string[]
     _id:string
 }
 
